@@ -64,7 +64,7 @@ llm = ChatGoogleGenerativeAI(
 # -------------------------------
 # 4️⃣ Core Chatbot Function
 # -------------------------------
-def chatbot_response(user_input: str) -> str:
+def get_chatbot_response(user_input: str) -> str:
     """Process a user query and return chatbot's response."""
 
     # 1️⃣ Determine scope
@@ -134,15 +134,4 @@ def chatbot_response(user_input: str) -> str:
     else:
         return "⚠️ Data not found for this location."
 
-# -------------------------------
-# 5️⃣ FastAPI Server
-# -------------------------------
-app = FastAPI()
 
-class QueryRequest(BaseModel):
-    query: str
-
-@app.post("/chat")
-def chat_endpoint(req: QueryRequest):
-    response = chatbot_response(req.query)
-    return {"response": response}
